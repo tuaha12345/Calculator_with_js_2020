@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Calculator</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<div class="main m-5 d-flex justify-content-center">
+	<div class="inner justify-content-center">
+
+		<div class="d-flex justify-content-center my-3 mt-5 ">
+			<input type="textarea" name=""  class="align-items-end" id="display" value=" ">
+			
+		</div>
+		<div class="Button text-center">
+			<div class="">
+				<button class="m-2 buttonName" id="seven" value="7">7</button>
+				<button class="m-2 buttonName" id="eight" value="8">8</button>
+				<button class="m-2 buttonName" id="nine" value="9">9</button>
+				<button class="m-2 buttonName" id="divide" value="/">/</button>
+				<br>
+				<button class="m-2 buttonName" id="six" value="6">6</button>
+				<button class="m-2 buttonName" id="five" value="5">5</button>
+				<button class="m-2 buttonName" id="four" value="4">4</button>
+				<button class="m-2 buttonName" id="muliple" value="*" >*</button>
+			    <br>
+				<button class="m-2 buttonName" id="three" value="3">3</button>
+				<button class="m-2 buttonName" id="two" value="2">2</button>
+				<button class="m-2 buttonName" id="one" value="1">1</button>
+				<button class="m-2 buttonName" id="minus" value="-">-</button>
+		        <br>
+				<button class="m-2 buttonName" id="C" value="C">C</button>
+				<button class="m-2 buttonName" id="zero" value="0">0</button>
+				<button class="m-2 buttonName" id="equal" value="=">=</button>
+				<button class="m-2 buttonName" id="plus" value="+">+</button>
+			</div>
+
+		</div>
+	</div>
+
+
+</div>
+
+
+
+<script type="text/javascript">
+	
+
+
+
+
+
+
+
+
+  var buttonName=document.getElementsByClassName('buttonName');
+  for(var i=0;i<buttonName.length;i++)
+  { 
+  	buttonName[i].addEventListener('click',function () {
+                            display(this);
+                            //console.log(this.value);
+  	});
+  	//console.log(buttonName[i].innerText);
+  }
+
+
+var add=[];
+var old=[];
+var new_one=[];
+
+var count=0;
+var temp='';
+
+function display(n)
+{
+
+  var dis=document.getElementById('display');
+  console.log(dis);
+      var buttonValue=n.value;
+      if(buttonValue=='C')
+      {
+         dis.value='';
+        add=[];
+        old=[];
+        new_one=[];
+      }
+
+
+      else if(buttonValue=='=')
+      {   
+      
+
+      	for(var i=0;i<add.length;i++)
+      	{ 
+      		old.push(add[i]);
+      		//console.log(old[i])
+
+      		if(add[i]=='+')
+      		{ 
+      			old.push(add[i-1]);
+      			new_one.push(add[i+1]);
+      			var total=parseFloat(old)+parseFloat(new_one);
+      			dis.value=total;
+      			add.push(total);
+      			
+      			//console.log(total)
+      			
+      		}
+
+      		 else if(add[i]=='-')
+      		{ 
+      			new_one.push(add[i+1]);
+      			var total=parseFloat(old)-parseFloat(new_one);
+      			dis.value=total;
+      			console.log(total);
+      			
+      		}
+
+      		else if(add[i]=='*')
+      		{ 
+      			new_one.push(add[i+1]);
+      			var total=parseFloat(old)*parseFloat(new_one);
+      			dis.value=total;
+      			console.log(total);
+      			
+      		}
+
+      		else if(add[i]=='/')
+      		{ 
+      			new_one.push(add[i+1]);
+      			var total=parseFloat(old)/parseFloat(new_one);
+      			dis.value=total;
+      			console.log(total);
+      			
+      		}
+      	}
+
+      }
+
+      else if(buttonValue=='+' || buttonValue=='-')
+      {
+      	dis.value=dis.value+n.value; 
+      	//console.log(dis.value);
+      	add.push(n.value);
+      	console.log(add);
+      	count=count+2;
+      	//console.log(count);
+      	//temp[count-1]='';
+      	dis.value='';
+
+      }
+      
+      else
+      {      
+      	//dis.value=''; 
+	           dis.value=dis.value+n.value; 
+	           console.log(temp);
+	           temp=dis.value; 
+	           //var nainai[count]=dis.value; 
+             //add.push(n.value);  
+             add[count]=temp;
+             console.log(add);
+
+      }
+ 
+}
+	
+</script>
+</body>
+</html>
